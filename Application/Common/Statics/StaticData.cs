@@ -44,6 +44,7 @@ namespace Application.Common.Statics
             {
                 case "DEVELOPMENT":
                     LogServer = "tcp://192.168.0.164:32700/";
+                    DatabaseConnectionString = "Server=127.0.0.1;Port=5433;Database=Icons;User Id= postgres;Password=159236;Include Error Detail=true";
                     Redis = "127.0.0.1:6380";
                     LogServerName = "LocalWebService";
                     RedisTransactionUrl = "http://192.168.0.231:6380/api/";

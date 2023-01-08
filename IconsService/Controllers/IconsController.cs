@@ -16,36 +16,36 @@ public class IconsController : BaseController
     public async Task<IActionResult> AddIcon([FromBody]AddIconRequestDto requestDto,[FromHeader]string username)
     {
         var response = await _iconService.AddIcon(requestDto,username);
-        return StatusCode(response.StatusCode, response.Result);
+        return StatusCode(response.StatusCode, response);
     }
     [HttpDelete("[action]")]
     public async Task<IActionResult> DeleteIcon([FromQuery]DeleteIconRequestDto requestDto,[FromHeader]string username)
     {
         var response = await _iconService.DeleteIcon(requestDto,username);
-        return StatusCode(response.StatusCode, response.Result);
+        return StatusCode(response.StatusCode, response);
     }
     [HttpPut("[action]")]
     public async Task<IActionResult> UpdateIcon([FromBody]UpdateIconRequestDto requestDto,[FromHeader]string username)
     {
         var response = await _iconService.UpdateIcon(requestDto,username);
-        return StatusCode(response.StatusCode, response.Result);
+        return StatusCode(response.StatusCode, response);
     }
     [HttpGet("[action]")]
     public async Task<IActionResult> GetIconByName([FromQuery]GetIconByNameRequestDto requestDto,[FromHeader]string username)
     {
         var response = await _iconService.GetIconByName(requestDto,username);
-        return StatusCode(response.StatusCode, response.Result);
+        return StatusCode(response.StatusCode, response);
     }
     [HttpGet("[action]")]
     public async Task<IActionResult> GetIconById([FromQuery]GetIconByIdRequestDto requestDto,[FromHeader]string username)
     {
         var response = await _iconService.GetIconById(requestDto,username);
-        return StatusCode(response.StatusCode, response.Result);
+        return StatusCode(response.StatusCode, response);
     }
     [HttpGet("[action]")]
     public async Task<IActionResult> GetAllIcons([FromQuery]GetAllIconsRequestDto requestDto,[FromHeader]string username)
     {
         var response = await _iconService.GetAllIcons(requestDto,username);
-        return StatusCode(response.StatusCode, response.Result);
+        return StatusCode(response.StatusCode, response);
     }
 }

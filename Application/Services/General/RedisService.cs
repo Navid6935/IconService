@@ -22,7 +22,7 @@ public class RedisService : IRedisService
         _transActionList.Clear();
     }
 
-    public bool StringSetAsync(string key, object value)
+    public bool StringSetAsync(string key, object value,TimeSpan expireTime)
     {
         _transActionList.Add(new RedisServiceDTO()
         {
@@ -30,7 +30,8 @@ public class RedisService : IRedisService
             Value = value.Serialize(),
             IsPassed = false,
             Type = RedisType.Set,
-            OldValue = ""
+            OldValue = null,
+            ExpireTime = expireTime
         });
         return true;
     }

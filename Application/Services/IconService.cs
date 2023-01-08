@@ -73,7 +73,7 @@ public class IconService : IIconService
     }
     
     private bool IsDuplicate(string name) =>
-        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.Equals(name,StringComparison.OrdinalIgnoreCase)) != null;
+        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.ToLower().Equals(name.ToLower())) != null;
     
     
     
@@ -164,7 +164,7 @@ public class IconService : IIconService
     }
     
     private bool IsDuplicate(string name,Guid id) =>
-        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.Equals(name,StringComparison.OrdinalIgnoreCase) && !d.Id.Equals(id)) != null;
+        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.ToLower().Equals(name.ToLower()) && !d.Id.Equals(id)) != null;
     
     private void UpdateModelAndDeleteCache(UpdateIconRequestDto requestDto, Icon icon)
     {
@@ -227,7 +227,7 @@ public class IconService : IIconService
             return null;
         }
         _redisService.CreateTransaction();
-        _redisService.StringSetAsync(IconByNameCacheKey + requestDto.Name, icon);
+        _redisService.StringSetAsync(IconByNameCacheKey + requestDto.Name, icon,TimeSpan.FromDays(7));
         await _redisService.ExecuteAsync();
         return icon;
     }
@@ -274,7 +274,7 @@ public class IconService : IIconService
             return null;
         }
         _redisService.CreateTransaction();
-        _redisService.StringSetAsync(IconByIdCacheKey + requestDto.Id, icon);
+        _redisService.StringSetAsync(IconByIdCacheKey + requestDto.Id, icon,TimeSpan.FromDays(7));
         await _redisService.ExecuteAsync();
         return icon;
     }
@@ -296,13 +296,13 @@ public class IconService : IIconService
                 return response;
             }
             
-            var iconsQueryable = _iconRepository.GetEntitiesByQuery();
+            icons = _iconRepository.GetEntitiesByQuery().ToList();
             
             _redisService.CreateTransaction();
-            _redisService.StringSetAsync(IconsListCacheKey, iconsQueryable);
+            _redisService.StringSetAsync(IconsListCacheKey, icons,TimeSpan.FromDays(7));
             await _redisService.ExecuteAsync();
             
-            icons = Pagination.GetList<Icon>(iconsQueryable, requestDto.Page, requestDto.PerPage);
+            icons = Pagination.GetList<Icon>(icons, requestDto.Page, requestDto.PerPage);
 
             response = GenerateResponse(HttpStatusCode.OK,ReturnMessages.SuccessfulGet("Icons"),
                 icons.Adapt<List<IconResponseDto>?>(), icons.Count,requestDto.Page,requestDto.PerPage);

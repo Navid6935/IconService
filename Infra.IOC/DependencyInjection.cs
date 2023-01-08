@@ -1,4 +1,6 @@
-﻿using Application.Interfaces.General;
+﻿using Application.Interfaces;
+using Application.Interfaces.General;
+using Application.Services;
 using Application.Services.General;
 using Domain.Interfaces;
 using Infra.Data.Repositories;
@@ -13,6 +15,11 @@ public static class DependencyInjection
     {
         
 
+        services.AddScoped<IIconService,IconService>();
+        services.AddScoped<IUsageService,UsageService>();
+        
+        services.AddScoped<IRedisService,RedisService>();
+        
         services.AddScoped(typeof(ILogService<>), typeof(LogService<>));
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

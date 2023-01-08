@@ -6,6 +6,7 @@ public class RedisServiceDTO
     public bool IsPassed { get; set; }
     public string? OldValue { get; set; }
     public RedisType Type { get; set; }
+    public TimeSpan ExpireTime { get; set; }
 }
 
 public enum RedisType
