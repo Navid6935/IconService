@@ -52,7 +52,7 @@ namespace Application.Common.Statics
                     break;
                 case "TEST":
                     LogServer = "tcp://192.168.0.164:32700/";
-                    DatabaseConnectionString = "Server=192.168.0.247;Port=5432;Database=IOT_DB;User Id= postgres;Password=Abc@1234;Include Error Detail=true";
+                    DatabaseConnectionString = "Server=192.168.0.247;Port=5432;Database=GENERAL_DB;User Id= postgres;Password=Abc@1234;Include Error Detail=true";
                     Redis = "192.168.0.245:6379";
                     LogServerName = "localWebService";
                     RedisTransactionUrl = "http://192.168.0.231:6380/api/";
@@ -61,7 +61,7 @@ namespace Application.Common.Statics
                     break;
                 case "RELEASE":
                     LogServer = "tcp://10.10.2.48:32700/";
-                    DatabaseConnectionString = "Server=10.10.2.29;Port=5432;Database=LWAAll-DeviceManager;User Id= postgres;Password=Qweasd123;";
+                    DatabaseConnectionString = "Server=10.10.2.29;Port=5432;Database=GENERAL_DB;User Id= postgres;Password=Qweasd123;";
                     Redis = "10.10.2.29:6379";
                     LogServerName = "localWebService";
                     RedisTransactionUrl = "http://10.10.2.29:6380/api/";
@@ -70,7 +70,7 @@ namespace Application.Common.Statics
                     break;
                 case "SQA":
                     LogServer = "tcp://192.168.1.78:32700/";
-                    DatabaseConnectionString = "Server=192.168.1.80;Port=5432;Database=IOT_DB;User Id= postgres;Password=Abc@1234;";
+                    DatabaseConnectionString = "Server=192.168.1.80;Port=5432;Database=GENERAL_DB;User Id= postgres;Password=Abc@1234;";
                     Redis = "192.168.1.80:6379";
                     LogServerName = "localWebService";
                     RedisTransactionUrl = "http://192.168.1.80:6380/api/";
@@ -78,7 +78,7 @@ namespace Application.Common.Statics
                     break;
                 case "SQA2":
                     LogServer = "tcp://192.168.1.78:32700/";
-                    DatabaseConnectionString = "Server=192.168.1.80;Port=5432;Database=IOT_DB;User Id= postgres;Password=Abc@1234;";
+                    DatabaseConnectionString = "Server=192.168.1.80;Port=5432;Database=GENERAL_DB;User Id= postgres;Password=Abc@1234;";
                     Redis = "192.168.1.166:6379";
                     LogServerName = "localWebService";
                     RedisTransactionUrl = "http://192.168.1.166:6380/api/";
