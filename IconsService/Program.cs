@@ -36,7 +36,7 @@ StaticData.Config(builder.Configuration);
 
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ApplicationContext>(options =>
 {
-    options.UseNpgsql("Server=192.168.1.80;Port=5432;Database=IOT_DB;User Id= postgres;Password=Abc@1234;");
+    options.UseNpgsql(StaticData.DatabaseConnectionString);
 });
 builder.Services.RegisterServices(builder.Configuration);
 #if KESTREL
