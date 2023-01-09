@@ -59,7 +59,7 @@ var app = builder.Build();
 #endif
 
 // Configure the HTTP request pipeline.
-#if !INCLUDEOPENAPI
+#if !EXCLUDEOPENAPI
     app.UseSwagger();
     app.UseSwaggerUI();
 #endif
