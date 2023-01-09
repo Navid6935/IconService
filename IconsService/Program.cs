@@ -59,11 +59,10 @@ var app = builder.Build();
 #endif
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+#if !INCLUDEOPENAPI
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+#endif
 
 app.UseHttpsRedirection();
 
