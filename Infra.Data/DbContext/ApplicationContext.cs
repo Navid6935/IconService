@@ -15,7 +15,7 @@ namespace Infra.Data.DbContext
         {
             base.OnModelCreating(modelBuilder);
             
-            modelBuilder.HasDefaultSchema("Icons");
+            modelBuilder.HasDefaultSchema("Yalda_IconService");
 
             // modelBuilder.Entity<Notification>().Property(n => n.Username).
             //     HasConversion(value => value.Encrypt(),value=>value.Decrypt());
