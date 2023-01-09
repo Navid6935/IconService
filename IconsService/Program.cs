@@ -3,6 +3,7 @@ using Application.Common.Statics;
 using Application.DTOs;
 using Infra.Data.DbContext;
 using Infra.IOC;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -54,7 +55,7 @@ var app = builder.Build();
 
     app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                c = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 #endif
 
