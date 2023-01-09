@@ -55,7 +55,7 @@ var app = builder.Build();
 
     app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
-                c = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
 #endif
 
