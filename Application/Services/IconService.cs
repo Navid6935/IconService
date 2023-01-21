@@ -37,9 +37,9 @@ public class IconService : IIconService
             ResponseDTO response;
             _logService.Info(LogType.request, requestDto, username);
 
-            if (IsDuplicate(requestDto.Name))
+            if (IsDuplicate(requestDto.Name,requestDto.Order))
             {
-                response = GenerateResponse(HttpStatusCode.BadRequest, ReturnMessages.AlreadyExist("Icon"));
+                response = GenerateResponse(HttpStatusCode.BadRequest, ReturnMessages.AlreadyExist("Icon with this name or order"));
                 _logService.Info(LogType.response, response, username);
                 return response;
             }
@@ -72,8 +72,9 @@ public class IconService : IIconService
         }
     }
     
-    private bool IsDuplicate(string name) =>
-        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.ToLower().Equals(name.ToLower())) != null;
+    private bool IsDuplicate(string name,byte order) =>
+        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.ToLower().Equals(name.ToLower()) ||
+                                                                 d.Order.Equals(order)) != null;
     
     
     
@@ -129,12 +130,12 @@ public class IconService : IIconService
             
             if (icon is null)
             {
-                response = GenerateResponse(HttpStatusCode.BadRequest,ReturnMessages.NotExist("Icon"));
+                response = GenerateResponse(HttpStatusCode.BadRequest,ReturnMessages.NotExist("Icon with this name or order"));
                 _logService.Info(LogType.response, response);
                 return response;
             }
             
-            if (IsDuplicate(requestDto.Name,requestDto.Id))
+            if (IsDuplicate(requestDto.Name,requestDto.Order,requestDto.Id))
             {
                 response = GenerateResponse(HttpStatusCode.BadRequest, ReturnMessages.AlreadyExist("Icon"));
                 _logService.Info(LogType.response, response, username);
@@ -163,8 +164,8 @@ public class IconService : IIconService
         }
     }
     
-    private bool IsDuplicate(string name,Guid id) =>
-        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => d.Name.ToLower().Equals(name.ToLower()) && !d.Id.Equals(id)) != null;
+    private bool IsDuplicate(string name,byte order,Guid id) =>
+        _iconRepository.GetEntitiesByQuery().FirstOrDefault(d => (d.Name.ToLower().Equals(name.ToLower()) || d.Order.Equals(order)) && !d.Id.Equals(id)) != null;
     
     private void UpdateModelAndDeleteCache(UpdateIconRequestDto requestDto, Icon icon)
     {
