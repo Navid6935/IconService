@@ -50,12 +50,41 @@ namespace Infra.Data.Migrations
                     b.Property<byte>("Order")
                         .HasColumnType("smallint");
 
+                    b.Property<Guid>("PageId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PageId");
+
                     b.ToTable("Icons", "Yalda_IconService");
+                });
+
+            modelBuilder.Entity("Domain.Models.Page", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("pages", "Yalda_IconService");
                 });
 
             modelBuilder.Entity("Domain.Models.Usage", b =>
@@ -94,6 +123,17 @@ namespace Infra.Data.Migrations
                     b.ToTable("Usages", "Yalda_IconService");
                 });
 
+            modelBuilder.Entity("Domain.Models.Icon", b =>
+                {
+                    b.HasOne("Domain.Models.Page", "page")
+                        .WithMany("icons")
+                        .HasForeignKey("PageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("page");
+                });
+
             modelBuilder.Entity("Domain.Models.Usage", b =>
                 {
                     b.HasOne("Domain.Models.Icon", "Icon")
@@ -103,6 +143,11 @@ namespace Infra.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Icon");
+                });
+
+            modelBuilder.Entity("Domain.Models.Page", b =>
+                {
+                    b.Navigation("icons");
                 });
 #pragma warning restore 612, 618
         }

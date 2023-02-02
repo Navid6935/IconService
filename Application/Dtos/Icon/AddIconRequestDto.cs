@@ -9,4 +9,5 @@ public class AddIconRequestDto
     public string DestinationUrl { get; set; } = null!;
     public string ImageUrl { get; set; } = null!;
     public byte Order { get; set; }
+    public Guid PageId { get; set; }
 }
